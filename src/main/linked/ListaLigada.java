@@ -12,15 +12,31 @@ public class ListaLigada implements EstruturaElementar{
 
     @Override
     public boolean buscaElemento(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaElemento'");
+        No procura = this.cabeca;
+        while(procura.getProximo() != null) {
+            procura = procura.getProximo();
+            if (procura.getValor() == valor) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public int buscaIndice(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaIndice'");
+    public int buscaIndice(int valor) {// retorna o valor que tá no indice[valor]
+        if (this.cabeca != null) {
+        int indicesProcurados = 0;
+        No procura = this.cabeca;
+        while (procura.getProximo() != null) {
+            procura.setProximo(procura.getProximo());
+            indicesProcurados++;
+            if (indicesProcurados == valor) {
+                return procura.getValor();
+            }
+        }
     }
+        return 0;
+        }
 
     @Override
     public int minimo() {
@@ -60,14 +76,26 @@ public class ListaLigada implements EstruturaElementar{
 
     @Override
     public void insereInicio(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereInicio'");
+        if (cabeca == null) {
+        cabeca = new No(valor);
+        } else {
+            No n = new No(valor);
+            n.setProximo(this.cabeca);
+            this.cabeca = n;
+        }
     }
 
     @Override
     public void insereFim(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereFim'");
+        if (this.cabeca.getProximo() != null){
+        No pesquisa = new No(this.cabeca.getValor());
+        while (pesquisa.getProximo() != null) {
+            pesquisa.setProximo(pesquisa.getProximo().getProximo());            
+            if (pesquisa.getProximo() == null) {
+                pesquisa.setProximo(new No(valor));
+            }
+        }
+    }
     }
 
     @Override
